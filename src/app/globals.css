@@ -1,0 +1,1443 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant premium (&:is(.premium *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-luxury: var(--luxury);
+  --color-luxury-foreground: var(--luxury-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================
+   DESIGN LANGUAGE — "Signal"  (final, merged, bug-checked)
+   Deep indigo base = intelligence/depth. A single warm amber
+   "signal" accent = the one place color is spent boldly, reserved
+   for live/active/AI-generating states only. Every token below is
+   defined in BOTH :root and .dark — nothing silently falls back
+   to the wrong mode's value.
+
+   ⚠️ UNCHANGED — do not edit. Premium's identity now lives entirely
+   in its own block below and no longer borrows structure from here.
+   ============================================================ */
+:root {
+  --background: oklch(0.99 0.002 260);
+  --foreground: oklch(0.14 0.03 272);
+
+  --surface-1: oklch(1 0 0);
+  --surface-2: oklch(0.975 0.005 260);
+  --surface-3: oklch(0.945 0.01 272);
+
+  --card: var(--surface-1);
+  --card-foreground: oklch(0.14 0.03 272);
+
+  --popover: var(--surface-1);
+  --popover-foreground: oklch(0.14 0.03 272);
+
+  --primary: oklch(0.42 0.22 272);
+  --primary-foreground: oklch(0.99 0.005 272);
+
+  --secondary: oklch(0.96 0.012 272);
+  --secondary-foreground: oklch(0.22 0.04 272);
+
+  --muted: oklch(0.955 0.008 260);
+  --muted-foreground: oklch(0.48 0.025 272);
+
+  --accent: oklch(0.93 0.038 272);
+  --accent-foreground: oklch(0.25 0.1 272);
+
+  /* electric violet "signal" — reserved for live/active/AI states only.
+     same hue family as --primary (272) but higher chroma/lightness so
+     it pops as "something is happening" against the calmer indigo UI. */
+  --signal: oklch(0.62 0.24 295);
+  --signal-foreground: oklch(0.99 0.01 295);
+
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0.005 25);
+
+  --border: oklch(0.89 0.012 272);
+  --input: oklch(0.89 0.012 272);
+  --ring: oklch(0.52 0.18 272);
+
+  --chart-1: oklch(0.5 0.2 272);
+  --chart-2: oklch(0.76 0.18 70);
+  --chart-3: oklch(0.68 0.15 200);
+  --chart-4: oklch(0.72 0.16 150);
+  --chart-5: oklch(0.65 0.22 25);
+
+  --radius: 0.5rem;
+  --font-display: var(--font-sans);
+  --tracking-label: 0.01em;
+
+  --sidebar: oklch(0.975 0.005 260);
+  --sidebar-foreground: oklch(0.14 0.03 272);
+  --sidebar-primary: oklch(0.42 0.22 272);
+  --sidebar-primary-foreground: oklch(0.99 0.005 272);
+  --sidebar-accent: oklch(0.93 0.038 272);
+  --sidebar-accent-foreground: oklch(0.25 0.1 272);
+  --sidebar-border: oklch(0.89 0.012 272);
+  --sidebar-ring: oklch(0.52 0.18 272);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.4 0.22 280), oklch(0.48 0.2 265) 50%, oklch(0.58 0.18 240));
+  --gradient-signal: linear-gradient(135deg, oklch(0.42 0.22 272), oklch(0.62 0.24 295));
+  --gradient-mesh: radial-gradient(at 10% 10%, oklch(0.88 0.08 272 / 45%) 0px, transparent 55%),
+    radial-gradient(at 90% 10%, oklch(0.88 0.1 295 / 20%) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.92 0.06 240 / 30%) 0px, transparent 55%);
+
+  --surface-glass: oklch(1 0 0 / 65%);
+  --surface-glass-border: oklch(1 0 0 / 80%);
+
+  --ease-out-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-premium: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-xs: 0 1px 2px oklch(0.3 0.05 272 / 5%);
+  --shadow-sm: 0 1px 3px oklch(0.3 0.05 272 / 8%), 0 1px 2px oklch(0.3 0.05 272 / 5%);
+  --shadow-md: 0 6px 16px -4px oklch(0.3 0.05 272 / 10%), 0 2px 6px -2px oklch(0.3 0.05 272 / 5%);
+  --shadow-lg: 0 16px 36px -8px oklch(0.3 0.05 272 / 14%), 0 4px 12px -4px oklch(0.3 0.05 272 / 7%);
+  --shadow-xl: 0 30px 60px -14px oklch(0.3 0.05 272 / 18%), 0 10px 22px -8px oklch(0.3 0.05 272 / 9%);
+  --shadow-primary: 0 12px 32px -8px oklch(0.42 0.22 272 / 38%);
+  --shadow-signal: 0 0 28px -2px oklch(0.62 0.24 295 / 45%);
+  --shadow-inner-highlight: inset 0 1px 0 oklch(1 0 0 / 70%);
+  --shadow-lift: 0 10px 28px -10px oklch(0.42 0.22 272 / 22%), 0 3px 10px -4px oklch(0.62 0.24 295 / 14%);
+}
+
+/* Dark — obsidian depth. Every token above is re-declared here;
+   nothing is left to inherit :root's light-mode value by accident. */
+.dark {
+  --background: oklch(0.11 0.015 272);
+  --foreground: oklch(0.98 0.005 272);
+
+  --surface-1: oklch(0.15 0.018 272);
+  --surface-2: oklch(0.19 0.02 272);
+  --surface-3: oklch(0.24 0.023 272);
+
+  --card: var(--surface-1);
+  --card-foreground: oklch(0.98 0.005 272);
+
+  --popover: var(--surface-1);
+  --popover-foreground: oklch(0.98 0.005 272);
+
+  --primary: oklch(0.74 0.18 272);
+  --primary-foreground: oklch(0.12 0.02 272);
+
+  --secondary: oklch(0.23 0.022 272);
+  --secondary-foreground: oklch(0.95 0.005 272);
+
+  --muted: oklch(0.21 0.018 272);
+  --muted-foreground: oklch(0.68 0.022 272);
+
+  --accent: oklch(0.27 0.055 272);
+  --accent-foreground: oklch(0.95 0.02 272);
+
+  --signal: oklch(0.72 0.24 295);
+  --signal-foreground: oklch(0.12 0.02 295);
+
+  --destructive: oklch(0.68 0.2 25);
+  --destructive-foreground: oklch(0.98 0.005 25);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.74 0.18 272);
+
+  --chart-1: oklch(0.74 0.18 272);
+  --chart-2: oklch(0.82 0.18 75);
+  --chart-3: oklch(0.72 0.14 200);
+  --chart-4: oklch(0.75 0.14 150);
+  --chart-5: oklch(0.7 0.2 25);
+
+  --sidebar: oklch(0.13 0.016 272);
+  --sidebar-foreground: oklch(0.98 0.005 272);
+  --sidebar-primary: oklch(0.74 0.18 272);
+  --sidebar-primary-foreground: oklch(0.12 0.02 272);
+  --sidebar-accent: oklch(0.27 0.055 272);
+  --sidebar-accent-foreground: oklch(0.95 0.02 272);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.74 0.18 272);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.62 0.19 280), oklch(0.72 0.18 260) 50%, oklch(0.7 0.16 240));
+  --gradient-signal: linear-gradient(135deg, oklch(0.74 0.18 272), oklch(0.72 0.24 295));
+  --gradient-mesh: radial-gradient(at 10% 10%, oklch(0.38 0.14 272 / 40%) 0px, transparent 55%),
+    radial-gradient(at 90% 10%, oklch(0.4 0.16 295 / 20%) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.34 0.12 240 / 30%) 0px, transparent 55%);
+
+  --surface-glass: oklch(0.15 0.018 272 / 60%);
+  --surface-glass-border: oklch(1 0 0 / 12%);
+
+  --ease-out-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-premium: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 24%);
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 32%), 0 1px 2px oklch(0 0 0 / 22%);
+  --shadow-md: 0 6px 18px -4px oklch(0 0 0 / 38%), 0 2px 8px -2px oklch(0 0 0 / 26%);
+  --shadow-lg: 0 18px 40px -8px oklch(0 0 0 / 48%), 0 6px 14px -6px oklch(0 0 0 / 30%);
+  --shadow-xl: 0 34px 68px -14px oklch(0 0 0 / 58%), 0 12px 26px -10px oklch(0 0 0 / 34%);
+  --shadow-primary: 0 0 0 1px oklch(0.74 0.18 272 / 20%), 0 0 36px -4px oklch(0.74 0.18 272 / 45%);
+  --shadow-signal: 0 0 32px -2px oklch(0.72 0.24 295 / 55%);
+
+  --radius: 1rem;
+  --font-display: var(--font-sans);
+  --tracking-label: 0.02em;
+}
+
+/* ============================================================
+   PREMIUM — "Aurum Noir"
+   এইটা আর dark-এর রিকালার না — নিজস্ব structural identity:
+
+   1. আলাদা geometry   → tighter radius (boxier, jewel-case feel)
+   2. আলাদা texture    → grain + vignette + double-mesh, dark ভেলভেটের মতো depth
+   3. আলাদা motion     → রোটেটিং conic "foil" বর্ডার, sweep-shine বাটন
+   4. আলাদা emphasis   → gold শুধু hairline/edge/টাইপে — কখনো bulk fill না
+   5. আলাদা micro-UI   → dual-tone focus ring, gold selection/scrollbar,
+                          eyebrow label, hairline divider — এগুলো
+                          light/dark-এ নাই, শুধু .premium-এ scoped
+   ============================================================ */
+.premium {
+  --background: oklch(0.065 0.014 174);
+  --foreground: oklch(0.96 0.008 95);
+
+  --surface-1: oklch(0.105 0.017 172);
+  --surface-2: oklch(0.14 0.02 170);
+  --surface-3: oklch(0.185 0.024 168);
+
+  --card: var(--surface-1);
+  --card-foreground: oklch(0.96 0.008 95);
+
+  --popover: var(--surface-2);
+  --popover-foreground: oklch(0.96 0.008 95);
+
+  --primary: oklch(0.72 0.17 158);
+  --primary-foreground: oklch(0.09 0.025 158);
+
+  --secondary: oklch(0.16 0.02 170);
+  --secondary-foreground: oklch(0.94 0.012 100);
+
+  --muted: oklch(0.14 0.018 170);
+  --muted-foreground: oklch(0.74 0.028 110);
+
+  --accent: oklch(0.21 0.05 158);
+  --accent-foreground: oklch(0.92 0.03 100);
+
+  /* live/active signal — luminous emerald, distinct hue from gold below */
+  --signal: oklch(0.84 0.19 163);
+  --signal-foreground: oklch(0.11 0.04 163);
+
+  /* champagne-gold — hairline / edge / single-word emphasis ONLY.
+     never a background fill, never a large shape. */
+  --luxury: oklch(0.81 0.1 82);
+  --luxury-2: oklch(0.7 0.13 65);
+  --luxury-foreground: oklch(0.15 0.035 82);
+
+  --destructive: oklch(0.66 0.2 25);
+  --destructive-foreground: oklch(0.98 0.005 25);
+
+  --border: oklch(0.78 0.05 90 / 9%);
+  --input: oklch(0.78 0.05 90 / 13%);
+  --ring: oklch(0.72 0.17 158);
+
+  --chart-1: oklch(0.72 0.17 158);
+  --chart-2: oklch(0.81 0.1 82);
+  --chart-3: oklch(0.72 0.13 195);
+  --chart-4: oklch(0.75 0.13 105);
+  --chart-5: oklch(0.66 0.2 25);
+
+  /* boxier, jewel-case geometry — visibly tighter than the 0.75rem
+     used by light/dark, so cards read "engineered", not "app default" */
+  --radius: 0.5rem;
+
+  --sidebar: oklch(0.055 0.013 175);
+  --sidebar-foreground: oklch(0.96 0.008 95);
+  --sidebar-primary: oklch(0.72 0.17 158);
+  --sidebar-primary-foreground: oklch(0.09 0.025 158);
+  --sidebar-accent: oklch(0.21 0.05 158);
+  --sidebar-accent-foreground: oklch(0.92 0.03 100);
+  --sidebar-border: oklch(0.78 0.05 90 / 9%);
+  --sidebar-ring: oklch(0.72 0.17 158);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.46 0.15 148), oklch(0.6 0.16 160) 50%, oklch(0.7 0.13 175));
+  --gradient-signal: linear-gradient(135deg, oklch(0.72 0.17 158), oklch(0.84 0.19 163));
+  --gradient-luxury: linear-gradient(135deg, oklch(0.7 0.13 65), oklch(0.86 0.1 90) 45%, oklch(0.7 0.13 65));
+  --gradient-foil: conic-gradient(from 0deg,
+    oklch(0.7 0.13 65) 0deg,
+    oklch(0.86 0.1 90) 70deg,
+    oklch(0.7 0.13 65) 140deg,
+    oklch(0.4 0.03 170 / 0%) 200deg,
+    oklch(0.72 0.17 158 / 60%) 280deg,
+    oklch(0.7 0.13 65) 360deg);
+  --gradient-mesh: radial-gradient(at 6% -8%, oklch(0.32 0.13 158 / 40%) 0px, transparent 52%),
+    radial-gradient(at 98% 8%, oklch(0.55 0.1 82 / 15%) 0px, transparent 42%),
+    radial-gradient(at 40% 110%, oklch(0.28 0.11 172 / 34%) 0px, transparent 55%),
+    radial-gradient(at 70% 40%, oklch(0.2 0.06 165 / 20%) 0px, transparent 60%);
+
+  --surface-glass: oklch(0.105 0.017 172 / 50%);
+  --surface-glass-border: oklch(0.81 0.1 82 / 14%);
+
+  --ease-out-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-premium: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* darker, tighter, more "black glass" shadow language than dark mode —
+     less blur spread, more density, so it reads heavier/richer */
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 40%);
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 50%), 0 1px 2px oklch(0 0 0 / 36%);
+  --shadow-md: 0 8px 20px -6px oklch(0 0 0 / 55%), 0 2px 8px -2px oklch(0 0 0 / 38%);
+  --shadow-lg: 0 22px 48px -12px oklch(0 0 0 / 62%), 0 8px 16px -8px oklch(0 0 0 / 42%);
+  --shadow-xl: 0 40px 80px -18px oklch(0 0 0 / 70%), 0 14px 28px -12px oklch(0 0 0 / 46%);
+  --shadow-primary: 0 0 0 1px oklch(0.72 0.17 158 / 24%), 0 0 44px -6px oklch(0.72 0.17 158 / 55%);
+  --shadow-signal: 0 0 40px -2px oklch(0.84 0.19 163 / 65%);
+  --shadow-luxury: 0 0 22px -4px oklch(0.81 0.1 82 / 45%);
+  --shadow-inner-highlight: inset 0 1px 0 oklch(1 0 0 / 5%);
+
+  /* premium spends more letter-spacing on labels than light/dark —
+     part of the "engraved plate" feel, applied via .eyebrow-luxury */
+  --tracking-luxury: 0.16em;
+  --tracking-label: 0.04em;
+
+  /* the single biggest differentiator: premium headlines are SERIF,
+     not the same grotesk sans light/dark use. This alone makes it
+     read as a different brand, not a recolored dashboard.
+     Ships with a safe system stack — swap in a real webfont via
+     next/font for the full effect (see guidance below the file). */
+  --font-display: 'Fraunces', 'Playfair Display', ui-serif, Georgia, 'Times New Roman', serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.35s var(--ease-out-premium), color 0.35s var(--ease-out-premium);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+    text-wrap: balance;
+  }
+
+  h1 { letter-spacing: -0.035em; }
+  h2 { letter-spacing: -0.028em; }
+  h3 { letter-spacing: -0.022em; }
+
+  p { text-wrap: pretty; }
+
+  code, kbd, samp {
+    @apply font-mono;
+    font-size: 0.9em;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklch, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  /* premium gets its own selection color — gold, not the ambient primary */
+  .premium ::selection {
+    background-color: color-mix(in oklch, var(--luxury) 45%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Visible, on-brand keyboard focus — required, never remove without replacing */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* premium's focus ring is dual-tone (emerald ring + gold hairline) —
+     outline alone can't do two colors, so box-shadow layers the gold */
+  .premium :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--luxury) 30%, transparent);
+    border-radius: var(--radius-sm);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklch, var(--border) 80%, transparent);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted-foreground);
+  }
+
+  .premium::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklch, var(--luxury) 45%, transparent);
+  }
+  .premium::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklch, var(--luxury) 70%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   SIGNATURE UTILITIES & MICRO-INTERACTIONS
+   One accent spent deliberately: --signal only marks something
+   live (AI generating, agent active, real-time status). Keep the
+   rest of the UI in the calm indigo/neutral register so signal
+   actually reads as "something is happening," not decoration.
+   ============================================================ */
+@layer utilities {
+  .bg-mesh {
+    background-image: var(--gradient-mesh);
+    background-color: var(--background);
+  }
+
+  .bg-surface-2 { background-color: var(--surface-2); }
+  .bg-surface-3 { background-color: var(--surface-3); }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--foreground) 20%, var(--primary) 65%, var(--chart-2) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-signal {
+    background: var(--gradient-signal);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Gold accent — pro/tier badges and one signature price or headline
+     moment per screen. Only meaningful in .premium; falls back to the
+     ordinary accent colors in light/dark since --luxury isn't defined there. */
+  .badge-luxury {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: color-mix(in oklch, var(--luxury, var(--accent)) 16%, transparent);
+    color: var(--luxury, var(--accent-foreground));
+    border: 1px solid color-mix(in oklch, var(--luxury, var(--accent)) 35%, transparent);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .text-gradient-luxury {
+    background: var(--gradient-luxury, var(--gradient-signal));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-glass-border);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* Ordinary interactive card — lift + glow border on hover, plus a
+     top-edge light catch (falls back to a transparent layer outside
+     .premium, where --shadow-inner-highlight isn't defined). Kept
+     for light/dark and as premium's base card if .card-luxury feels
+     like too much for a given screen. */
+  .card-premium {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm), var(--shadow-inner-highlight, 0 0 #0000);
+    transition: transform 0.3s var(--ease-out-premium),
+      box-shadow 0.3s var(--ease-out-premium),
+      border-color 0.3s var(--ease-out-premium);
+  }
+  .card-premium:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-inner-highlight, 0 0 #0000);
+    border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
+  }
+
+  .btn-glow {
+    box-shadow: var(--shadow-primary);
+    transition: box-shadow 0.25s var(--ease-out-premium),
+      transform 0.25s var(--ease-out-premium),
+      filter 0.25s var(--ease-out-premium);
+  }
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+  }
+
+  /* Gradient-edge card wrapper — use for one signature panel, not everywhere */
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius-xl);
+    background: var(--card);
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* Fine noise texture for large flat gradient/mesh areas */
+  .bg-noise {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Live AI-status dot — the one place the signal color pulses */
+  .signal-dot {
+    position: relative;
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--signal);
+    box-shadow: var(--shadow-signal);
+  }
+  .signal-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1.5px solid var(--signal);
+    animation: signal-ping 2s var(--ease-in-out-premium) infinite;
+  }
+  @keyframes signal-ping {
+    0% { transform: scale(0.8); opacity: 0.9; }
+    80%, 100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  /* Shimmer sweep — for "AI is generating" text/content states */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklch, var(--primary) 15%, transparent) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Skeleton loading block — built on the same shimmer, for cards/rows/avatars */
+  .skeleton {
+    background-color: var(--surface-3);
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklch, var(--foreground) 8%, transparent) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 0.5s var(--ease-out-premium) both; }
+  .animate-fade-up-delay-1 { animation: fade-up 0.5s var(--ease-out-premium) 0.1s both; }
+  .animate-fade-up-delay-2 { animation: fade-up 0.5s var(--ease-out-premium) 0.2s both; }
+  .animate-fade-up-delay-3 { animation: fade-up 0.5s var(--ease-out-premium) 0.3s both; }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-scale-in { animation: scale-in 0.35s var(--ease-out-premium) both; }
+
+  .glow-border {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .glow-border:hover {
+    border-color: color-mix(in oklch, var(--primary) 50%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--primary) 20%, transparent),
+      0 12px 40px -12px color-mix(in oklch, var(--primary) 35%, transparent);
+  }
+
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -40px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+  .animate-blob { animation: blobFloat 14s ease-in-out infinite; }
+  .animate-blob-slow { animation: blobFloat 20s ease-in-out infinite reverse; }
+}
+
+/* ============================================================
+   PREMIUM-ONLY UTILITIES — "Aurum Noir" signature components
+   সবগুলো `.premium` ancestor-এর নিচে scoped, তাই light/dark এ
+   কোনো প্রভাব নেই — এগুলো premium ছাড়া exist-ই করে না।
+   ============================================================ */
+@layer utilities {
+  /* Layered mesh + fine grain + soft vignette — the base premium
+     backdrop. Distinctly deeper/denser than .bg-mesh used elsewhere. */
+  .premium .bg-mesh-luxury {
+    position: relative;
+    background-image: var(--gradient-mesh);
+    background-color: var(--background);
+  }
+  .premium .bg-mesh-luxury::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 48%, oklch(0 0 0 / 32%) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Rotating conic "foil" edge — a genuinely animated gold/emerald
+     border that light/dark's static .gradient-border can't do.
+     Use for ONE hero panel per screen (pricing card, featured stat). */
+  .premium .card-luxury {
+    position: relative;
+    background: var(--card);
+    border-radius: var(--radius-xl);
+    padding: 1px;
+    isolation: isolate;
+    box-shadow: var(--shadow-lg);
+  }
+  .premium .card-luxury::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--gradient-foil);
+    animation: foil-rotate 6s linear infinite;
+    opacity: 0.9;
+  }
+  .premium .card-luxury > * {
+    position: relative;
+    display: block;
+    background: var(--card);
+    border-radius: calc(var(--radius-xl) - 1px);
+  }
+  .premium .card-luxury:hover::before {
+    animation-duration: 2.4s;
+  }
+  @keyframes foil-rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Static hairline variant of the above — cheaper, use for repeated
+     cards in a grid where an animated border everywhere would be noise. */
+  .premium .card-hairline {
+    background: var(--card);
+    border: 1px solid color-mix(in oklch, var(--luxury) 22%, var(--border));
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm), var(--shadow-inner-highlight);
+    transition: transform 0.3s var(--ease-out-premium),
+      box-shadow 0.3s var(--ease-out-premium),
+      border-color 0.3s var(--ease-out-premium);
+  }
+  .premium .card-hairline:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklch, var(--luxury) 55%, var(--border));
+    box-shadow: var(--shadow-xl), var(--shadow-inner-highlight);
+  }
+
+  /* Foil sweep-shine button — a moving diagonal highlight on hover,
+     the "expensive" button feel used by luxury product sites. */
+  .premium .btn-luxury {
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-signal);
+    color: var(--signal-foreground);
+    border: 1px solid color-mix(in oklch, var(--luxury) 40%, transparent);
+    box-shadow: var(--shadow-primary);
+    transition: transform 0.25s var(--ease-out-premium), filter 0.25s var(--ease-out-premium);
+  }
+  .premium .btn-luxury::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(115deg, transparent, oklch(1 0 0 / 45%), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s var(--ease-out-premium);
+  }
+  .premium .btn-luxury:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+  .premium .btn-luxury:hover::after {
+    left: 130%;
+  }
+
+  /* Small-caps, wide-tracking eyebrow label — "engraved plate" feel,
+     used above headings/section titles. Gold, never large text. */
+  .premium .eyebrow-luxury {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-luxury);
+    text-transform: uppercase;
+    color: var(--luxury);
+  }
+  .premium .eyebrow-luxury::before {
+    content: "";
+    width: 14px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--luxury));
+  }
+
+  /* Hairline gradient divider — replaces a plain border-t for one
+     signature section break. */
+  .premium .divider-luxury {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--luxury) 55%, transparent), transparent);
+  }
+
+  /* Featured price / stat — gold gradient number with a thin
+     underline tick. Use once per screen, not on every metric. */
+  .premium .price-luxury {
+    display: inline-block;
+    background: var(--gradient-luxury);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-variant-numeric: tabular-nums;
+    position: relative;
+    padding-bottom: 0.15em;
+  }
+  .premium .price-luxury::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 2.2em;
+    height: 2px;
+    background: var(--gradient-luxury);
+    border-radius: 999px;
+  }
+
+  /* Glass variant tuned for the premium palette — cooler tint,
+     gold-tinted edge instead of the neutral white edge elsewhere. */
+  .premium .glass-luxury {
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-glass-border);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+  }
+
+  /* Signal dot re-tuned for premium's emerald hue automatically via
+     the --signal token override — no extra class needed, .signal-dot
+     just works correctly inside .premium. */
+}
+
+/* ============================================================
+   BRAND PERSONALITY LAYER
+   এই ক্লাসগুলো একবার JSX-এ বসিয়ে দিলে, .html-এর theme class
+   (কিছু না / .dark / .premium) অনুযায়ী নিজে থেকেই আকৃতি বদলায়।
+   কোথাও dark:/premium: variant ছড়াতে হবে না — একটাই className,
+   তিন থিমে তিন রকম চেহারা। এটাই আসল পার্থক্য তৈরি করে, শুধু রঙ না।
+   ============================================================ */
+@layer utilities {
+  /* ---------- Hero heading — the #1 lever ---------- */
+  .brand-heading {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  .premium .brand-heading {
+    letter-spacing: -0.005em;
+    font-weight: 500;
+  }
+
+  .brand-heading-accent {
+    /* light: flat solid color, NOT a gradient — calmer, editorial */
+    color: var(--primary);
+  }
+  .dark .brand-heading-accent {
+    background: var(--gradient-signal);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .premium .brand-heading-accent {
+    background: var(--gradient-luxury);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+
+  /* ---------- Eyebrow / top badge — pill vs glass-pill vs no-pill ---------- */
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+  .dark .brand-badge {
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-glass-border);
+    color: var(--foreground);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(12px);
+  }
+  /* premium: no pill at all — a flat engraved label between two hairlines */
+  .premium .brand-badge {
+    background: transparent;
+    border: none;
+    border-top: 1px solid color-mix(in oklch, var(--luxury) 35%, transparent);
+    border-bottom: 1px solid color-mix(in oklch, var(--luxury) 35%, transparent);
+    border-radius: 0;
+    padding: 8px 4px;
+    color: var(--luxury);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-luxury);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ---------- Primary CTA — same outline+shine STRUCTURE in all 3 themes,
+     only color/radius/font differ. currentColor drives the shine sweep so
+     each theme's accent color flows through automatically. ---------- */
+  .brand-btn-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid color-mix(in oklch, var(--primary) 50%, transparent);
+    font-weight: 600;
+    transition: transform 0.2s var(--ease-out-premium),
+      border-color 0.2s var(--ease-out-premium),
+      background 0.2s var(--ease-out-premium),
+      box-shadow 0.2s var(--ease-out-premium);
+  }
+  .brand-btn-primary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(115deg, transparent, color-mix(in oklch, currentColor 45%, transparent), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s var(--ease-out-premium);
+    pointer-events: none;
+  }
+  .brand-btn-primary:hover {
+    border-color: var(--primary);
+    background: color-mix(in oklch, var(--primary) 8%, transparent);
+    transform: translateY(-1px);
+  }
+  .brand-btn-primary:hover::after {
+    left: 130%;
+  }
+  .brand-btn-primary:focus-visible {
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--ring) 22%, transparent);
+  }
+
+  .dark .brand-btn-primary {
+    color: var(--signal);
+    border-color: color-mix(in oklch, var(--signal) 55%, transparent);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 0 22px -6px color-mix(in oklch, var(--signal) 45%, transparent);
+  }
+  .dark .brand-btn-primary:hover {
+    border-color: var(--signal);
+    background: color-mix(in oklch, var(--signal) 10%, transparent);
+    box-shadow: 0 0 34px -4px color-mix(in oklch, var(--signal) 60%, transparent);
+  }
+
+  .premium .brand-btn-primary {
+    color: var(--luxury);
+    border-color: color-mix(in oklch, var(--luxury) 55%, transparent);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .premium .brand-btn-primary:hover {
+    border-color: var(--luxury);
+    background: color-mix(in oklch, var(--luxury) 8%, transparent);
+  }
+
+  /* ---------- Secondary CTA ---------- */
+  .brand-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .brand-btn-secondary:hover {
+    background: var(--secondary);
+  }
+  .dark .brand-btn-secondary {
+    border-radius: var(--radius-xl);
+    border-color: var(--border);
+  }
+  .premium .brand-btn-secondary {
+    border-radius: var(--radius-sm);
+    border-color: color-mix(in oklch, var(--foreground) 20%, transparent);
+    color: var(--muted-foreground);
+    font-family: var(--font-display);
+  }
+  .premium .brand-btn-secondary:hover {
+    border-color: var(--foreground);
+    color: var(--foreground);
+    background: transparent;
+  }
+
+  /* ---------- Form controls — premium-level focus, all 3 themes ---------- */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    transition: border-color 0.2s var(--ease-out-premium),
+      box-shadow 0.2s var(--ease-out-premium),
+      background 0.2s var(--ease-out-premium);
+  }
+  input:not([type="checkbox"]):not([type="radio"]):hover,
+  textarea:hover,
+  select:hover {
+    border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
+  }
+  input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    border-color: color-mix(in oklch, var(--primary) 55%, var(--border));
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 12%, transparent);
+    outline: none;
+  }
+  .dark input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+  .dark textarea:focus-visible,
+  .dark select:focus-visible {
+    border-color: color-mix(in oklch, var(--signal) 55%, var(--border));
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--signal) 16%, transparent);
+  }
+  .premium input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+  .premium textarea:focus-visible,
+  .premium select:focus-visible {
+    border-color: color-mix(in oklch, var(--luxury) 55%, var(--border));
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--luxury) 14%, transparent);
+  }
+
+  /* ---------- Avatar hover lift — subtle, works alongside brand-avatar ---------- */
+  .brand-avatar {
+    border-radius: 999px;
+    border: 2px solid var(--background);
+    transition: transform 0.2s var(--ease-out-premium), box-shadow 0.2s var(--ease-out-premium);
+  }
+  .brand-avatar:hover {
+    transform: translateY(-2px);
+    z-index: 2;
+  }
+  .dark .brand-avatar {
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--signal) 25%, transparent);
+  }
+  .premium .brand-avatar {
+    filter: grayscale(1) contrast(1.05);
+    border: 1.5px solid var(--luxury);
+  }
+
+  /* ---------- Hero backdrop decoration — dots vs mesh+blobs vs grain+vignette ---------- */
+  .brand-hero-bg {
+    position: relative;
+    background-color: var(--background);
+    background-image: radial-gradient(color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .dark .brand-hero-bg {
+    background-image: var(--gradient-mesh);
+    background-size: auto;
+  }
+  .premium .brand-hero-bg {
+    background-image: var(--gradient-mesh);
+    background-size: auto;
+  }
+  .premium .brand-hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 48%, oklch(0 0 0 / 35%) 100%);
+  }
+}
+/* ============================================================
+   NAVIGATION — THREE THEME SIGNATURE
+   Light  → Editorial Indigo
+   Dark   → Electric Signal
+   Premium → Aurum Gold
+   ============================================================ */
+
+@layer utilities {
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: var(--muted-foreground);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition:
+      color 0.3s var(--ease-out-premium),
+      transform 0.3s var(--ease-out-premium);
+  }
+
+  /* Soft hover atmosphere */
+  .nav-link__glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--primary);
+    opacity: 0;
+    filter: blur(18px);
+    transform: scale(0.7);
+    transition:
+      opacity 0.35s var(--ease-out-premium),
+      transform 0.35s var(--ease-out-premium);
+  }
+
+  .nav-link:hover {
+    color: var(--foreground);
+  }
+
+  .nav-link:hover .nav-link__glow {
+    opacity: 0.08;
+    transform: scale(1);
+  }
+
+  /* Active indicator */
+  .nav-link__indicator {
+    position: relative;
+    display: flex;
+    width: 0;
+    height: 6px;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    transition: width 0.4s var(--ease-out-premium);
+  }
+
+  .nav-link__indicator span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 transparent;
+    opacity: 0;
+    transform: scale(0.3);
+    transition:
+      width 0.4s var(--ease-out-premium),
+      height 0.4s var(--ease-out-premium),
+      opacity 0.3s ease,
+      transform 0.4s var(--ease-out-premium),
+      box-shadow 0.4s ease;
+  }
+
+  /* ==========================================================
+     LIGHT THEME
+     Elegant editorial indigo
+     ========================================================== */
+
+  .nav-link[data-active="true"] {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .nav-link[data-active="true"] .nav-link__indicator {
+    width: 7px;
+  }
+
+  .nav-link[data-active="true"] .nav-link__indicator span {
+    width: 5px;
+    height: 5px;
+    opacity: 1;
+    transform: scale(1);
+    background: var(--primary);
+    box-shadow:
+      0 0 0 3px color-mix(
+        in oklch,
+        var(--primary) 10%,
+        transparent
+      ),
+      0 0 10px color-mix(
+        in oklch,
+        var(--primary) 45%,
+        transparent
+      );
+  }
+
+  .nav-link[data-active="true"] .nav-link__glow {
+    opacity: 0.06;
+    transform: scale(1);
+  }
+
+  /* ==========================================================
+     DARK THEME
+     Electric violet signal
+     ========================================================== */
+
+  .dark .nav-link[data-active="true"] {
+    color: var(--foreground);
+    text-shadow:
+      0 0 18px color-mix(
+        in oklch,
+        var(--signal) 20%,
+        transparent
+      );
+  }
+
+  .dark .nav-link__glow {
+    background: var(--signal);
+  }
+
+  .dark .nav-link:hover .nav-link__glow {
+    opacity: 0.11;
+  }
+
+  .dark .nav-link[data-active="true"] .nav-link__indicator {
+    width: 8px;
+  }
+
+  .dark .nav-link[data-active="true"] .nav-link__indicator span {
+    width: 5px;
+    height: 5px;
+    background: var(--signal);
+    box-shadow:
+      0 0 0 3px color-mix(
+        in oklch,
+        var(--signal) 12%,
+        transparent
+      ),
+      0 0 12px var(--signal),
+      0 0 24px color-mix(
+        in oklch,
+        var(--signal) 50%,
+        transparent
+      );
+  }
+
+  /* ==========================================================
+     PREMIUM THEME
+     Champagne gold / luxury editorial
+     ========================================================== */
+
+  .premium .nav-link {
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    letter-spacing: 0.015em;
+  }
+
+  .premium .nav-link__glow {
+    background: var(--luxury);
+    border-radius: var(--radius-sm);
+    filter: blur(14px);
+  }
+
+  .premium .nav-link:hover {
+    color: var(--luxury);
+  }
+
+  .premium .nav-link:hover .nav-link__glow {
+    opacity: 0.07;
+  }
+
+  .premium .nav-link[data-active="true"] {
+    color: var(--luxury);
+    font-weight: 500;
+  }
+
+  .premium .nav-link[data-active="true"] .nav-link__indicator {
+    width: 9px;
+  }
+
+  .premium .nav-link[data-active="true"] .nav-link__indicator span {
+    width: 4px;
+    height: 4px;
+    border-radius: 1px;
+    background: var(--luxury);
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+    box-shadow:
+      0 0 0 3px color-mix(
+        in oklch,
+        var(--luxury) 10%,
+        transparent
+      ),
+      0 0 12px color-mix(
+        in oklch,
+        var(--luxury) 55%,
+        transparent
+      );
+  }
+
+  .premium .nav-link[data-active="true"] .nav-link__glow {
+    opacity: 0.055;
+  }
+
+  /* Premium hover shine */
+  .premium .nav-link__text {
+    transition:
+      letter-spacing 0.3s var(--ease-out-premium),
+      color 0.3s var(--ease-out-premium);
+  }
+
+  .premium .nav-link:hover .nav-link__text {
+    letter-spacing: 0.025em;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .nav-link__glow,
+    .nav-link__indicator,
+    .nav-link__indicator span,
+    .nav-link__text {
+      transition: none !important;
+    }
+  }
+}
+/* ============================================================
+   GLOBAL WEBSITE CONTAINER SYSTEM
+   Applies to Navbar + Hero + Sections + Footer + Content
+   ============================================================ */
+
+@layer utilities {
+  .site-container {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: 4%;
+  }
+
+  /*
+   * Existing Tailwind containers
+   * Keep old component code working without editing every file.
+   */
+  .max-w-6xl,
+  .max-w-7xl {
+    width: 100%;
+    max-width: none !important;
+    margin-inline: auto;
+    padding-inline: 4%;
+  }
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 639px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 100%;
+      padding-inline: 16px;
+    }
+  }
+}
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 92%;
+      padding-inline: 0;
+    }
+  }
+}
+
+/* ============================================================
+   LAPTOP
+   ============================================================ */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 90%;
+      padding-inline: 0;
+    }
+  }
+}
+
+/* ============================================================
+   DESKTOP
+   ============================================================ */
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 88%;
+      padding-inline: 0;
+    }
+  }
+}
+
+/* ============================================================
+   LARGE DESKTOP
+   ============================================================ */
+
+@media (min-width: 1536px) and (max-width: 1919px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 86%;
+      padding-inline: 0;
+    }
+  }
+}
+
+/* ============================================================
+   ULTRA WIDE
+   ============================================================ */
+
+@media (min-width: 1920px) {
+  @layer utilities {
+    .site-container,
+    .max-w-6xl,
+    .max-w-7xl {
+      width: 84%;
+      padding-inline: 0;
+    }
+  }
+}
