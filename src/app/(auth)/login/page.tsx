@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,15 +9,21 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import { loginSchema, type LoginInput } from "@/lib/validations/auth.schema";
 import { SocialLoginButtons } from "@/components/shared/social-login-button";
-import { apiClient } from "@/lib/api/client";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
 import { authApi } from "@/lib/api/auth";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,22 +32,26 @@ export default function LoginPage() {
 
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "", rememberMe: false },
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
   });
 
-const onSubmit = async (values: LoginInput) => {
-  setIsSubmitting(true);
+  const onSubmit = async (values: LoginInput) => {
+    setIsSubmitting(true);
 
-  try {
-    await authApi.login(values);
-    toast.success("Logged in successfully.");
-    window.location.assign(redirectTo);
-  } catch (error: unknown) {
-    toast.error(getErrorMessage(error, "Invalid email or password."));
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    try {
+      await authApi.login(values);
+      toast.success("Logged in successfully.");
+      window.location.assign(redirectTo);
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error, "Invalid email or password."));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -52,7 +62,10 @@ const onSubmit = async (values: LoginInput) => {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4"
+        >
           <FormField
             control={form.control}
             name="email"
@@ -60,7 +73,11 @@ const onSubmit = async (values: LoginInput) => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="you@example.com" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,7 +91,11 @@ const onSubmit = async (values: LoginInput) => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -82,12 +103,19 @@ const onSubmit = async (values: LoginInput) => {
           />
 
           <div className="flex justify-end">
-            <Link href="/forgot-password" className="text-sm text-muted-foreground hover:underline">
+            <Link
+              href="/forgot-password"
+              className="text-sm text-muted-foreground hover:underline"
+            >
               Forgot password?
             </Link>
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Logging in..." : "Log in"}
           </Button>
         </form>
@@ -95,10 +123,27 @@ const onSubmit = async (values: LoginInput) => {
 
       <p className="mt-4 text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-foreground hover:underline">
+        <Link
+          href="/register"
+          className="text-foreground hover:underline"
+        >
           Register
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[300px] items-center justify-center">
+          <p className="text-sm text-muted-foreground">Loading...</p>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
