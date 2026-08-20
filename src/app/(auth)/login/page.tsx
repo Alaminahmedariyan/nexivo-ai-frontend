@@ -21,7 +21,8 @@ import {
 import { loginSchema, type LoginInput } from "@/lib/validations/auth.schema";
 import { SocialLoginButtons } from "@/components/shared/social-login-button";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
-import { authApi } from "@/lib/api/auth";
+import { authClient } from "@/lib/auth/auth-client";
+
 
 function LoginForm() {
   const router = useRouter();
@@ -43,7 +44,17 @@ function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      await authApi.login(values);
+      const { error } = await authClient.signIn.email({
+        email: values.email,
+        password: values.password,
+        rememberMe: values.rememberMe,
+      });
+
+      if (error) {
+        toast.error(error.message ?? "Invalid email or password.");
+        return;
+      }
+
       toast.success("Logged in successfully.");
       window.location.assign(redirectTo);
     } catch (error: unknown) {

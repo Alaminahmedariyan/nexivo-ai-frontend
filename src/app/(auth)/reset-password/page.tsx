@@ -17,8 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { resetPasswordSchema, type ResetPasswordInput } from "@/lib/validations/auth.schema";
-import { authApi } from "@/lib/api/auth";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
+import { authClient } from "@/lib/auth/auth-client";
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -40,11 +40,15 @@ function ResetPasswordForm() {
     setIsSubmitting(true);
 
     try {
-      await authApi.resetPassword({
-        token,
+      const { error } = await authClient.resetPassword({
         newPassword: values.newPassword,
-        confirmPassword: values.confirmPassword,
+        token,
       });
+
+      if (error) {
+        toast.error(error.message ?? "Reset link is invalid or expired.");
+        return;
+      }
 
       toast.success("Password reset successfully. Please log in.");
       router.push("/login");

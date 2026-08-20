@@ -12,9 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { registerSchema, type RegisterInput } from "@/lib/validations/auth.schema";
 import { SocialLoginButtons } from "@/components/shared/social-login-button";
-import { apiClient } from "@/lib/api/client";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
-import { authApi } from "@/lib/api/auth";
+import { authClient } from "@/lib/auth/auth-client";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -25,19 +24,30 @@ export default function RegisterPage() {
     defaultValues: { name: "", email: "", password: "", confirmPassword: "", phone: "" },
   });
 
-const onSubmit = async (values: RegisterInput) => {
-  setIsSubmitting(true);
+  const onSubmit = async (values: RegisterInput) => {
+    setIsSubmitting(true);
 
-  try {
-    await authApi.register(values);
-    toast.success("Account created. Please check your email to verify your account.");
-    router.push("/login");
-  } catch (error: unknown) {
-    toast.error(getErrorMessage(error, "Registration failed."));
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    try {
+      const { error } = await authClient.signUp.email({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        phone: values.phone,
+      });
+
+      if (error) {
+        toast.error(error.message ?? "Registration failed.");
+        return;
+      }
+
+      toast.success("Account created. Please check your email to verify your account.");
+      router.push("/login");
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error, "Registration failed."));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>

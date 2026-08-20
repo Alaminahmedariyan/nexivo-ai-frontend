@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/form";
 
 import { changePasswordSchema, type ChangePasswordInput } from "@/lib/validations/auth.schema";
-import { authApi } from "@/lib/api/auth";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
+import { authClient } from "@/lib/auth/auth-client";
 
 export default function ChangePasswordPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +38,17 @@ export default function ChangePasswordPage() {
     setIsSubmitting(true);
 
     try {
-      await authApi.changePassword(values);
+      const { error } = await authClient.changePassword({
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
+        revokeOtherSessions: values.revokeOtherSessions,
+      });
+
+      if (error) {
+        toast.error(error.message ?? "Could not change password.");
+        return;
+      }
+
       toast.success("Password changed successfully.");
       form.reset();
     } catch (error: unknown) {
