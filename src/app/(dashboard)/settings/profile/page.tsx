@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useState } from "react";
@@ -30,6 +29,17 @@ const ALLOWED_IMAGE_TYPES = [
   "image/webp",
 ];
 
+type ProfileUser = {
+  name: string;
+  email: string;
+  image?: string | null;
+  role?: string | null;
+};
+
+type ProfileFormProps = {
+  user: ProfileUser;
+};
+
 export default function ProfileSettingsPage() {
   const {
     data: session,
@@ -59,21 +69,15 @@ export default function ProfileSettingsPage() {
   return <ProfileForm user={user} />;
 }
 
-type ProfileFormProps = {
-  user: {
-    name: string;
-    email: string;
-    image?: string | null;
-    role?: string;
-  };
-};
-
 function ProfileForm({ user }: ProfileFormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState(user.name ?? "");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState(user.image ?? "");
+  const [selectedFile, setSelectedFile] =
+    useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState(
+    user.image ?? "",
+  );
   const [fileError, setFileError] = useState("");
 
   const {
@@ -100,7 +104,9 @@ function ProfileForm({ user }: ProfileFormProps) {
     }
 
     if (file.size > MAX_FILE_SIZE) {
-      setFileError("Image size must be less than 5MB.");
+      setFileError(
+        "Image size must be less than 5MB.",
+      );
 
       event.target.value = "";
       return;
