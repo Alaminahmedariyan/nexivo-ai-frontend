@@ -1,12 +1,13 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { createAuthClient } from "better-auth/react";
-import { inferAdditionalFields } from "better-auth/client/plugins";
+import { inferAdditionalFields, emailOTPClient, oauthPopupClient } from "better-auth/client/plugins";
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:5000";
+const AUTH_BASE_URL = `${BACKEND_URL}/api/auth`;
 
 export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000",
+  baseURL: AUTH_BASE_URL,
   plugins: [
     inferAdditionalFields({
       user: {
@@ -14,11 +15,11 @@ export const authClient = createAuthClient({
         phone: { type: "string", required: false },
       },
     }),
+    emailOTPClient(),
+    oauthPopupClient(),
   ],
 });
 
 export const { useSession, signIn, signUp, signOut, updateUser } = authClient;
-
-export const forgetPassword = (authClient as any).forgetPassword;
 
 export const resetPassword = authClient.resetPassword;

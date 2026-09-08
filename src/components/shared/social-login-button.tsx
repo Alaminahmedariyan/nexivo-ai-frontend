@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
+import { authClient } from "@/lib/auth/auth-client";
 
 function GoogleIcon() {
   return (
@@ -34,29 +35,10 @@ function GoogleIcon() {
 export function SocialLoginButtons() {
   const handleGoogle = async () => {
     try {
-      const res = await fetch("/api/auth/sign-in/social", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          provider: "google",
-          callbackURL: `${window.location.origin}/dashboard`,
-        }),
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: `${window.location.origin}/auth-callback`,
       });
-
-      const data = (await res.json().catch(() => null)) as
-        | { url?: string; redirect?: boolean; message?: string }
-        | null;
-
-      if (!res.ok || !data || !data.url) {
-        const message = data?.message ?? "Google sign-in failed.";
-        toast.error(message);
-        return;
-      }
-
-      window.location.href = data.url;
     } catch (error: unknown) {
       toast.error(getErrorMessage(error, "Google sign-in failed."));
     }
