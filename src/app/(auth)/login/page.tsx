@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -25,7 +25,6 @@ import { authClient } from "@/lib/auth/auth-client";
 
 
 function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -133,6 +132,13 @@ function LoginForm() {
       </Form>
 
       <p className="mt-4 text-center text-sm text-muted-foreground">
+        <Link
+          href="/otp-login"
+          className="text-foreground hover:underline"
+        >
+          Continue with OTP
+        </Link>
+        {" · "}
         Don&apos;t have an account?{" "}
         <Link
           href="/register"

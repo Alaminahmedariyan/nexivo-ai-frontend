@@ -19,7 +19,10 @@ export function ThemeToggle() {
   // Avoids a hydration mismatch — the server doesn't know the user's
   // saved theme preference, so we render a neutral placeholder until
   // the client has mounted and next-themes has resolved it.
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   if (!mounted) {
     return <Button variant="ghost" size="icon" className="h-9 w-9" />;

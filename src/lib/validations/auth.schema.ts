@@ -97,6 +97,41 @@ export const changePasswordSchema = z
     path: ["newPassword"],
   });
 
+// ---------- OTP ----------
+
+export const sendOtpSchema = z.object({
+  email: emailSchema,
+  type: z.enum(["sign-in", "email-verification", "forget-password"]),
+});
+
+export const checkOtpSchema = z.object({
+  email: emailSchema,
+  type: z.enum(["sign-in", "email-verification", "forget-password"]),
+  otp: z.string().length(6, "OTP must be exactly 6 digits."),
+});
+
+export const verifyEmailOtpSchema = z.object({
+  email: emailSchema,
+  otp: z.string().length(6, "OTP must be exactly 6 digits."),
+});
+
+export const signInWithOtpSchema = z.object({
+  email: emailSchema,
+  otp: z.string().length(6, "OTP must be exactly 6 digits."),
+  name: nameSchema.optional().or(z.literal("")),
+  image: z.string().url("Enter a valid image URL.").optional().or(z.literal("")),
+});
+
+export const forgotPasswordOtpSchema = z.object({
+  email: emailSchema,
+});
+
+export const resetPasswordOtpSchema = z.object({
+  email: emailSchema,
+  otp: z.string().length(6, "OTP must be exactly 6 digits."),
+  password: strongPasswordSchema,
+});
+
 // ---------- Types ----------
 
 export type LoginInput = z.infer<typeof loginSchema>;
@@ -104,3 +139,9 @@ export type RegisterInput = z.infer<typeof registerSchema>;
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type SendOtpInput = z.infer<typeof sendOtpSchema>;
+export type CheckOtpInput = z.infer<typeof checkOtpSchema>;
+export type VerifyEmailOtpInput = z.infer<typeof verifyEmailOtpSchema>;
+export type SignInWithOtpInput = z.infer<typeof signInWithOtpSchema>;
+export type ForgotPasswordOtpInput = z.infer<typeof forgotPasswordOtpSchema>;
+export type ResetPasswordOtpInput = z.infer<typeof resetPasswordOtpSchema>;
