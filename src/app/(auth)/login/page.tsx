@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -23,8 +23,8 @@ import { SocialLoginButtons } from "@/components/shared/social-login-button";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
 import { authClient } from "@/lib/auth/auth-client";
 
-
 function LoginForm() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -55,7 +55,9 @@ function LoginForm() {
       }
 
       toast.success("Logged in successfully.");
-      window.location.assign(redirectTo);
+
+      router.refresh();
+      window.location.replace(redirectTo);
     } catch (error: unknown) {
       toast.error(getErrorMessage(error, "Invalid email or password."));
     } finally {
@@ -115,6 +117,7 @@ function LoginForm() {
           <div className="flex justify-end">
             <Link
               href="/forgot-password"
+              prefetch={false}
               className="text-sm text-muted-foreground hover:underline"
             >
               Forgot password?
@@ -134,6 +137,7 @@ function LoginForm() {
       <p className="mt-4 text-center text-sm text-muted-foreground">
         <Link
           href="/otp-login"
+          prefetch={false}
           className="text-foreground hover:underline"
         >
           Continue with OTP
@@ -142,6 +146,7 @@ function LoginForm() {
         Don&apos;t have an account?{" "}
         <Link
           href="/register"
+          prefetch={false}
           className="text-foreground hover:underline"
         >
           Register
