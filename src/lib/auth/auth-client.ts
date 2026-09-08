@@ -7,8 +7,15 @@ import {
   oauthPopupClient,
 } from "better-auth/client/plugins";
 
+const getBaseURL = () => {
+  if (typeof window !== "undefined") {
+    return `${window.location.origin}/api/auth`;
+  }
+  return `${process.env.NEXT_PUBLIC_APP_URL}/api/auth`;
+};
+
 export const authClient = createAuthClient({
-  baseURL: "/api/auth",
+  baseURL: getBaseURL(),
   fetchOptions: {
     credentials: "include",
   },
