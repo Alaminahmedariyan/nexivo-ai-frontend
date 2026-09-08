@@ -135,14 +135,6 @@ function LoginForm() {
       </Form>
 
       <p className="mt-4 text-center text-sm text-muted-foreground">
-        <Link
-          href="/otp-login"
-          prefetch={false}
-          className="text-foreground hover:underline"
-        >
-          Continue with OTP
-        </Link>
-        {" · "}
         Don&apos;t have an account?{" "}
         <Link
           href="/register"

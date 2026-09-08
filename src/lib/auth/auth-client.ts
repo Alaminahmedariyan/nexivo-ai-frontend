@@ -7,13 +7,8 @@ import {
   oauthPopupClient,
 } from "better-auth/client/plugins";
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000";
-const AUTH_BASE_URL = `${BACKEND_URL}/api/auth`;
-
 export const authClient = createAuthClient({
-  baseURL: AUTH_BASE_URL,
+  baseURL: "/api/auth",
   fetchOptions: {
     credentials: "include",
   },
@@ -30,5 +25,4 @@ export const authClient = createAuthClient({
 });
 
 export const { useSession, signIn, signUp, signOut, updateUser } = authClient;
-
 export const resetPassword = authClient.resetPassword;

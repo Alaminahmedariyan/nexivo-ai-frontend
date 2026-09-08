@@ -40,8 +40,8 @@ export default function RegisterPage() {
         return;
       }
 
-      toast.success("Account created. Please check your email to verify your account.");
-      router.push("/login");
+      toast.success("Account created. Please check your email for a verification code.");
+      router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
     } catch (error: unknown) {
       toast.error(getErrorMessage(error, "Registration failed."));
     } finally {
