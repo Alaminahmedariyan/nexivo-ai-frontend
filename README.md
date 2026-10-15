@@ -1,114 +1,243 @@
-# ⚡ Nexivo AI Frontend
+<div align="center">
 
-### AI-Powered Agency Management Platform
+<!-- Replace with your logo: place it at public/logo.png -->
+<img src="public/logo.png" alt="Nexivo AI logo" width="84" height="84" />
 
-Nexivo AI Frontend is a modern, scalable **AI Agency SaaS web application** built with **Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, TanStack Query, Zustand, React Hook Form, Zod, and Stripe**.
+# Nexivo AI
 
-The application provides a polished interface for managing agency operations across **leads, clients, projects, proposals, invoices, payments, AI workflows, notifications, and content management**.
+### The AI-powered workspace for modern agencies
 
-It is designed to work seamlessly with the **Nexivo AI Backend API** while maintaining a clean, reusable, and scalable frontend architecture.
+Manage leads, clients, projects, proposals, invoices and payments — with AI built into every step of the workflow.
 
----
+<br />
 
-## ✨ Highlights
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://your-frontend-url.vercel.app)
+[![Backend Repo](https://img.shields.io/badge/Backend-Nexivo_API-4169E1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Alaminahmedariyan/nexivo-ai-backend)
 
-* ⚡ Next.js 16 App Router
-* ⚛️ React 19
-* 🔷 TypeScript
-* 🎨 Tailwind CSS 4
-* 🧩 shadcn/ui + Radix UI
-* 🔄 TanStack Query for server-state management
-* 📊 TanStack Table for advanced data tables
-* 🗂️ Zustand for client-side state management
-* 📝 React Hook Form + Zod
-* 💳 Stripe payment integration
-* 🎞️ Framer Motion animations
-* 🌙 Dark / Light theme support
-* 🔔 Sonner toast notifications
-* 📱 Responsive design
-* 🔐 Better Auth integration
-* ☎️ International phone number support
-* 🧱 Reusable component architecture
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=000)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=fff)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=fff)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=flat-square&logo=shadcnui&logoColor=fff)
+![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=flat-square&logo=reactquery&logoColor=fff)
+![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=flat-square&logo=stripe&logoColor=fff)
+![License](https://img.shields.io/badge/license-ISC-blue?style=flat-square)
 
----
+[**Highlights**](#-highlights) ·
+[**Areas**](#-application-areas) ·
+[**Architecture**](#-architecture) ·
+[**Getting Started**](#-getting-started)
 
-# 🛠 Tech Stack
-
-| Technology        | Version / Usage          |
-| ----------------- | ------------------------ |
-| Next.js           | 16.3.0                   |
-| React             | 19.2.8                   |
-| TypeScript        | 5.x                      |
-| Tailwind CSS      | 4.x                      |
-| shadcn/ui         | 4.16.2                   |
-| Radix UI          | Accessible UI primitives |
-| TanStack Query    | Server-state management  |
-| TanStack Table    | Data tables              |
-| Zustand           | Client-state management  |
-| React Hook Form   | Form management          |
-| Zod               | Form & data validation   |
-| Stripe            | Payment integration      |
-| Framer Motion     | Animations               |
-| next-themes       | Theme management         |
-| Sonner            | Toast notifications      |
-| Lucide React      | Icons                    |
-| date-fns          | Date utilities           |
-| libphonenumber-js | Phone number utilities   |
+</div>
 
 ---
 
-# 🏗 Application Architecture
+## 📑 Table of Contents
 
-```text id="h8w2xl"
-                        Nexivo AI Frontend
-                               │
-                    ┌──────────┴──────────┐
-                    │                     │
-                Public App           Authenticated App
-                    │                     │
-                    │              ┌──────┴──────┐
-                    │              │             │
-                    │           Admin        Workspace
-                    │                          │
-                    └──────────────┬───────────┘
-                                   │
-                             API / Auth Layer
-                                   │
-                    ┌──────────────┴──────────────┐
-                    │                             │
-              Nexivo Backend                 Better Auth
-                    │
-          ┌─────────┼─────────┐
-          ▼         ▼         ▼
-      PostgreSQL  Stripe  Cloudinary
+- [Overview](#-overview)
+- [Screenshots](#-screenshots)
+- [Highlights](#-highlights)
+- [Tech Stack](#-tech-stack)
+- [Application Areas](#-application-areas)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#-environment-variables)
+- [Security](#-security)
+- [Related Repositories](#-related-repositories)
+- [Author](#-author)
+- [License](#-license)
+
+---
+
+## ✨ Overview
+
+**Nexivo AI Frontend** is a modern, scalable **AI agency SaaS web application**. It gives agencies a polished interface to run their operations across **leads, clients, projects, proposals, invoices, payments, AI workflows, notifications and content management**, and works with the [Nexivo AI Backend](https://github.com/Alaminahmedariyan/nexivo-ai-backend) API.
+
+| | |
+|---|---|
+| 🏠 **Public website** | Landing page, services, portfolio, testimonials, contact forms |
+| 👑 **Admin dashboard** | Centralized control over the whole platform |
+| 👨‍💻 **Team workspace** | Leads, clients, projects, proposals and AI workflows |
+| 🤝 **Client portal** | Projects, progress, files, proposals, invoices and payments |
+| 🤖 **AI workspace** | Conversations, proposal generation and usage tracking |
+| 💳 **Billing** | Stripe-powered checkout for invoices |
+
+---
+
+## 🖼️ Screenshots
+
+<!-- Add screenshots to /docs/screenshots and update the paths below -->
+
+| Landing page | Admin dashboard |
+|---|---|
+| ![Landing](docs/screenshots/landing.png) | ![Admin](docs/screenshots/admin.png) |
+
+| Leads pipeline | AI workspace |
+|---|---|
+| ![Leads](docs/screenshots/leads.png) | ![AI](docs/screenshots/ai.png) |
+
+---
+
+## 🚀 Highlights
+
+| | | |
+|---|---|---|
+| ⚡ **Next.js 16** App Router | ⚛️ **React 19** | 🔷 **TypeScript** |
+| 🎨 **Tailwind CSS 4** | 🧩 **shadcn/ui + Radix UI** | 🔄 **TanStack Query** server state |
+| 📊 **TanStack Table** data tables | 🗂️ **Zustand** client state | 📝 **React Hook Form + Zod** |
+| 💳 **Stripe** payments | 🎞️ **Framer Motion** animations | 🌙 **Light / dark / system** theme |
+| 🔔 **Sonner** toasts | 🔐 **Better Auth** integration | ☎️ **International phone** input |
+
+---
+
+## 🧰 Tech Stack
+
+| Technology | Usage |
+|---|---|
+| **Next.js 16** · **React 19** · **TypeScript 5** | Framework and language |
+| **Tailwind CSS 4** · **shadcn/ui** · **Radix UI** | Styling and accessible UI primitives |
+| **TanStack Query** | Server-state management |
+| **TanStack Table** | Advanced data tables |
+| **Zustand** | Client-state management |
+| **React Hook Form** · **Zod** | Forms and validation |
+| **Stripe** (`@stripe/stripe-js`, `@stripe/react-stripe-js`) | Payments |
+| **Framer Motion** | Animations |
+| **next-themes** | Theme management |
+| **Sonner** | Toast notifications |
+| **Lucide React** | Icons |
+| **date-fns** · **libphonenumber-js** | Date and phone utilities |
+
+---
+
+## 🧭 Application Areas
+
+```mermaid
+flowchart TD
+    App[Nexivo AI Frontend] --> Public[Public website]
+    App --> Auth[Authenticated app]
+    Auth --> Admin[Admin dashboard]
+    Auth --> Team[Team workspace]
+    Auth --> Client[Client portal]
 ```
 
-The frontend separates:
+<details open>
+<summary><b>🏠 Public website</b></summary>
 
-```text id="iy9yvh"
-UI
-↓
-Hooks
-↓
-State / Query Layer
-↓
-API Layer
-↓
-Backend API
+Agency landing page · services and packages · portfolio · technologies · testimonials · contact / quote forms · newsletter subscription · public AI entry points
+
+</details>
+
+<details>
+<summary><b>🔐 Authentication</b></summary>
+
+Powered by **Better Auth** with five roles: `SUPER_ADMIN`, `ADMIN`, `TEAM_MEMBER`, `CLIENT`, `USER`. Flows: `/login`, `/register`, `/forgot-password`, `/reset-password`. Authenticated areas are protected by role and permissions.
+
+</details>
+
+<details>
+<summary><b>👑 Admin dashboard</b></summary>
+
+Users · Leads · Clients · Projects · Services · Packages · Portfolios · Technologies · Testimonials · Site Settings · Invoices · Payments · AI · Notifications · Activity Logs · API Keys
+
+</details>
+
+<details>
+<summary><b>👨‍💻 Team workspace</b></summary>
+
+Assigned leads · clients · projects · milestones · timelines · project files · proposals · AI workflows · notifications
+
+</details>
+
+<details>
+<summary><b>🤝 Client portal</b></summary>
+
+Projects and progress · milestones · timelines · files · proposals · invoices · payments · notifications
+
+</details>
+
+<details>
+<summary><b>📩 Lead management</b></summary>
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> NEW
+    NEW --> CONTACTED
+    CONTACTED --> QUOTED
+    QUOTED --> MEETING_SCHEDULED
+    MEETING_SCHEDULED --> NEGOTIATION
+    NEGOTIATION --> WON
+    NEGOTIATION --> LOST
 ```
 
-This keeps presentation logic separate from server communication and application state.
+Search, filtering, sorting and pagination · lead details · assignment · status management · conversion workflow · meeting scheduling
+
+</details>
+
+<details>
+<summary><b>📁 Project management</b></summary>
+
+Each project is organized into **Overview · Members · Milestones · Timeline · Files · Proposals · Invoices**, with progress tracking and team collaboration.
+
+</details>
+
+<details>
+<summary><b>🤖 AI workspace</b></summary>
+
+- **Conversations** — conversation list, conversation view and message composer
+- **Proposals** — generate, review, edit, change status and accept
+- **Usage** — AI usage, token usage, execution history and workflow executions
+
+</details>
+
+<details>
+<summary><b>💳 Billing & payments</b></summary>
+
+```mermaid
+flowchart LR
+    P[Project] --> I[Invoice] --> C[Checkout] --> S[Stripe] --> PA[Payment] --> U[Updated invoice]
+```
+
+</details>
+
+<details>
+<summary><b>🔔 Notification center</b></summary>
+
+All · Unread · Mark as read · Mark all as read — covering leads, projects, milestones, clients, proposals and AI activity.
+
+</details>
 
 ---
 
-# 📂 Project Structure
+## 🏗️ Architecture
 
-```text id="05kvd5"
+```mermaid
+flowchart LR
+    UI[UI components] --> H[Hooks]
+    H --> Q[TanStack Query / Zustand]
+    Q --> A[API layer]
+    A --> B[Nexivo Backend]
+    A --> BA[Better Auth]
+    B --> DB[(PostgreSQL)]
+    B --> ST[Stripe]
+    B --> CL[Cloudinary]
+```
+
+Presentation, state and server communication stay separate:
+
+- **Forms:** React Hook Form → Zod validation → API request → backend validation (the backend remains the source of truth)
+- **Data screens:** API → TanStack Query → table / components → user action → mutation → query invalidation
+
+---
+
+## 📂 Project Structure
+
+```
 nexivo-ai-frontend/
-│
 ├── app/
-│   ├── (public)/
-│   ├── (auth)/
+│   ├── (public)/        # Public website
+│   ├── (auth)/          # Login, register, password flows
 │   ├── dashboard/
 │   ├── leads/
 │   ├── clients/
@@ -119,506 +248,66 @@ nexivo-ai-frontend/
 │   ├── ai/
 │   ├── notifications/
 │   └── settings/
-│
 ├── components/
-│   ├── ui/
+│   ├── ui/              # shadcn/ui primitives
 │   ├── forms/
 │   ├── tables/
 │   ├── dashboard/
 │   ├── layout/
 │   └── shared/
-│
 ├── hooks/
-│
 ├── lib/
 │   ├── api/
 │   ├── auth/
 │   ├── query/
 │   ├── validations/
 │   └── utils/
-│
-├── store/
-│
+├── store/               # Zustand stores
 ├── types/
-│
 ├── public/
-│
 ├── next.config.ts
 ├── package.json
 ├── tsconfig.json
-├── postcss.config.mjs
-└── README.md
-```
-
-> The exact directory structure can evolve as the application grows, but the architecture is designed around reusable modules and separation of concerns.
-
----
-
-# 🌐 Application Areas
-
-## 🏠 Public Website
-
-The public experience can include:
-
-* Agency landing page
-* Services
-* Service packages
-* Portfolio
-* Technologies
-* Testimonials
-* Contact / quote forms
-* Newsletter subscription
-* Public AI entry points
-
----
-
-# 🔐 Authentication
-
-The frontend integrates with **Better Auth** for authentication.
-
-Supported roles:
-
-```text id="w3uyqh"
-SUPER_ADMIN
-ADMIN
-TEAM_MEMBER
-CLIENT
-USER
-```
-
-Authentication flows include:
-
-```text id="s6z8yu"
-/login
-/register
-/forgot-password
-/reset-password
-```
-
-Authenticated areas are protected according to the user's role and application permissions.
-
----
-
-# 👑 Admin Dashboard
-
-The administration interface is designed to provide centralized control over the agency platform.
-
-Core areas:
-
-```text id="9xknn0"
-Dashboard
-├── Users
-├── Leads
-├── Clients
-├── Projects
-├── Services
-├── Packages
-├── Portfolios
-├── Technologies
-├── Testimonials
-├── Site Settings
-├── Invoices
-├── Payments
-├── AI
-├── Notifications
-├── Activity Logs
-└── API Keys
+└── postcss.config.mjs
 ```
 
 ---
 
-# 👨‍💻 Team Workspace
+## 🏁 Getting Started
 
-Team members can work with:
+**Prerequisites:** Node.js 18+, pnpm (or npm / yarn), and a running [Nexivo AI Backend](https://github.com/Alaminahmedariyan/nexivo-ai-backend).
 
-* Assigned leads
-* Clients
-* Projects
-* Milestones
-* Timelines
-* Project files
-* Proposals
-* AI workflows
-* Notifications
+```bash
+# 1. Clone
+git clone <repository-url>
+cd nexivo-ai-frontend
+
+# 2. Install
+pnpm install
+
+# 3. Configure environment
+#    create .env.local (see below)
+
+# 4. Start
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start the development server |
+| `pnpm build` | Create a production build |
+| `pnpm start` | Start the production server |
+| `pnpm lint` | Run ESLint |
 
 ---
 
-# 🤝 Client Portal
+## 🔐 Environment Variables
 
-The client-facing workspace can provide access to:
+Create a `.env.local` file in the project root.
 
-* Projects
-* Project progress
-* Milestones
-* Timelines
-* Files
-* Proposals
-* Invoices
-* Payments
-* Notifications
-
----
-
-# 📩 Lead Management
-
-The frontend supports a complete lead-management workflow:
-
-```text id="j5qkda"
-NEW
-  ↓
-CONTACTED
-  ↓
-QUOTED
-  ↓
-MEETING_SCHEDULED
-  ↓
-NEGOTIATION
-  ↓
-WON / LOST
-```
-
-Lead interfaces can include:
-
-* Search
-* Filtering
-* Sorting
-* Pagination
-* Lead details
-* Assignment
-* Status management
-* Conversion workflow
-* Meeting scheduling
-
----
-
-# 📁 Project Management
-
-Projects are organized into dedicated sections:
-
-```text id="q6s7cs"
-Project
-├── Overview
-├── Members
-├── Milestones
-├── Timeline
-├── Files
-├── Proposals
-└── Invoices
-```
-
-The interface supports project progress tracking and team collaboration.
-
----
-
-# 🤖 AI Workspace
-
-AI is a major part of the Nexivo experience.
-
-## AI Conversations
-
-The UI can provide:
-
-```text id="1wv2cr"
-Conversation List
-       ↓
-Conversation View
-       ↓
-Message Composer
-       ↓
-AI Response
-```
-
-## AI Proposals
-
-Users can:
-
-* Generate proposals
-* Review proposal content
-* Edit proposal information
-* Change proposal status
-* Accept proposals
-
-## AI Usage
-
-The admin/team interface can display:
-
-* AI usage
-* Token usage
-* AI execution history
-* Workflow executions
-
----
-
-# 💳 Billing & Payments
-
-Nexivo uses **Stripe** for online payments.
-
-Frontend billing flow:
-
-```text id="l6m9i1"
-Project
-   ↓
-Invoice
-   ↓
-Checkout
-   ↓
-Stripe
-   ↓
-Payment
-   ↓
-Updated Invoice
-```
-
-Stripe integration is handled with:
-
-```text id="3u4jpr"
-@stripe/stripe-js
-@stripe/react-stripe-js
-```
-
----
-
-# 🔔 Notifications
-
-The application includes a centralized notification experience:
-
-```text id="4w6xqa"
-Notification Center
-├── All
-├── Unread
-├── Mark as Read
-└── Mark All as Read
-```
-
-Notifications can relate to:
-
-* Leads
-* Projects
-* Milestones
-* Clients
-* Proposals
-* AI activity
-
----
-
-# 📊 Data Tables
-
-Advanced administrative tables are powered by:
-
-```text id="q9j7cv"
-@tanstack/react-table
-```
-
-Table functionality can include:
-
-* Sorting
-* Filtering
-* Pagination
-* Column management
-* Row actions
-* Search
-* Responsive layouts
-
----
-
-# 🔄 Server State Management
-
-Server-side API data is managed with:
-
-```text id="v6s4j8"
-@tanstack/react-query
-```
-
-This provides a consistent approach to:
-
-* Queries
-* Mutations
-* Cache management
-* Refetching
-* Loading states
-* Error states
-* Optimistic UI patterns
-
----
-
-# 🗂️ Client State Management
-
-Global client-side state is handled with:
-
-```text id="dcxn8u"
-Zustand
-```
-
-It can be used for application-level state such as:
-
-* UI preferences
-* Sidebar state
-* Temporary workflow state
-* Client-side session-related state
-* Shared application state
-
----
-
-# 📝 Forms & Validation
-
-Forms use:
-
-```text id="7klm2s"
-React Hook Form
-        +
-Zod
-```
-
-Typical flow:
-
-```text id="kn54h5"
-User Input
-    ↓
-React Hook Form
-    ↓
-Zod Validation
-    ↓
-API Request
-    ↓
-Backend Validation
-```
-
-This provides consistent client-side validation while the backend remains the final source of truth.
-
----
-
-# 🎨 UI System
-
-The interface uses **shadcn/ui and Radix UI** to provide reusable accessible components.
-
-Included primitives cover areas such as:
-
-* Accordion
-* Alert Dialog
-* Avatar
-* Checkbox
-* Collapsible
-* Dialog
-* Dropdown Menu
-* Label
-* Popover
-* Scroll Area
-* Select
-* Switch
-* Tabs
-
-This allows the application to maintain a consistent design system while remaining highly customizable.
-
----
-
-# 🎞️ Animations
-
-Interactive transitions and motion effects use:
-
-```text id="p3a0yl"
-Framer Motion
-```
-
-Animations can be used for:
-
-* Page transitions
-* Dialogs
-* Cards
-* Navigation
-* Dashboard interactions
-* Loading states
-
----
-
-# 🌙 Theme System
-
-Theme management uses:
-
-```text id="x4z0si"
-next-themes
-```
-
-Supported UI modes:
-
-```text id="9m31og"
-Light
-Dark
-System
-```
-
----
-
-# 🔔 Notifications & Feedback
-
-User feedback is provided through:
-
-```text id="kw4ywm"
-Sonner
-```
-
-Used for:
-
-* Success messages
-* Error messages
-* Form feedback
-* API status feedback
-* Background actions
-
----
-
-# ☎️ Phone Number Support
-
-International phone inputs and validation can be handled using:
-
-```text id="6w7gqk"
-libphonenumber-js
-```
-
----
-
-# 🔌 Backend Integration
-
-The frontend communicates with the Nexivo backend using REST APIs.
-
-Development API:
-
-```text id="gyop9h"
-http://localhost:5000/api/v1
-```
-
-Authentication API:
-
-```text id="z5j5bp"
-http://localhost:5000/api/auth
-```
-
-Example architecture:
-
-```text id="r67dws"
-Page
- ↓
-React Hook / Query Hook
- ↓
-API Client
- ↓
-Nexivo Backend
- ↓
-Database / External Service
-```
-
----
-
-# 🌍 Environment Variables
-
-Create:
-
-```text id="x8t0km"
-.env.local
-```
-
-Example:
-
-```env id="4t0jfr"
+```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 NEXT_PUBLIC_AUTH_URL=http://localhost:5000/api/auth
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -626,196 +315,46 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 ```
 
-> Only public values should use the `NEXT_PUBLIC_` prefix. Never expose backend secrets, Stripe secret keys, database credentials, or private API keys in the frontend.
+> ⚠️ Only public values use the `NEXT_PUBLIC_` prefix. Never expose backend secrets, Stripe secret keys, database credentials or private API keys in the frontend.
 
 ---
 
-# 🚀 Getting Started
+## 🛡️ Security
 
-## 1. Clone
-
-```bash id="7b82os"
-git clone <repository-url>
-cd nexivo-ai-frontend
-```
-
-## 2. Install Dependencies
-
-Using pnpm:
-
-```bash id="h5n4wq"
-pnpm install
-```
-
-Using npm:
-
-```bash id="j22qja"
-npm install
-```
-
-Using yarn:
-
-```bash id="6jo5hm"
-yarn
-```
-
-## 3. Configure Environment
-
-Create `.env.local` and configure the required public environment variables.
-
-## 4. Start Development
-
-```bash id="6wn3ij"
-pnpm dev
-```
-
-or:
-
-```bash id="4r2nm6"
-npm run dev
-```
-
-Open:
-
-```text id="fau9mk"
-http://localhost:3000
-```
+- Protected routes with **role-aware UI**
+- **Better Auth** integration, with authorization enforced by the backend
+- **Zod** client-side validation
+- Stripe **publishable key** only — no secrets in browser code
+- Careful environment variable handling
 
 ---
 
-# 🧰 Available Scripts
+## 🔗 Related Repositories
 
-```bash id="j4p9s1"
-pnpm dev
-pnpm build
-pnpm start
-pnpm lint
-```
-
-| Command      | Description              |
-| ------------ | ------------------------ |
-| `pnpm dev`   | Start development server |
-| `pnpm build` | Create production build  |
-| `pnpm start` | Start production server  |
-| `pnpm lint`  | Run ESLint               |
+| Repository | Description |
+|---|---|
+| **nexivo-ai-frontend** (this repo) | Next.js frontend |
+| [**nexivo-ai-backend**](https://github.com/Alaminahmedariyan/nexivo-ai-backend) | Express + Prisma API for authentication, leads, clients, projects, AI, proposals, invoices, payments and more |
 
 ---
 
-# 🧪 Development Workflow
+## 👨‍💻 Author
 
-Recommended architecture:
+**Alamin Ahmed** — Full Stack Developer
 
-```text id="c1x7hq"
-Design
-  ↓
-Reusable UI
-  ↓
-Form / Validation
-  ↓
-Query / Mutation
-  ↓
-API Layer
-  ↓
-Backend
-```
-
-For data-heavy screens:
-
-```text id="kz4m8h"
-API
- ↓
-TanStack Query
- ↓
-Table / Components
- ↓
-User Interaction
- ↓
-Mutation
- ↓
-Query Invalidation
-```
+[![GitHub](https://img.shields.io/badge/GitHub-Alaminahmedariyan-181717?style=flat-square&logo=github)](https://github.com/Alaminahmedariyan)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Alamin_Ahmed-0A66C2?style=flat-square&logo=linkedin&logoColor=fff)](https://www.linkedin.com/in/alamin-ahmed-536463382)
 
 ---
 
-# 🔒 Security
+## 📄 License
 
-The frontend follows secure client-side practices:
+Distributed under the **ISC License**.
 
-* Protected application routes
-* Role-aware UI
-* Better Auth integration
-* Backend-authoritative authorization
-* Zod client validation
-* Secure environment variable handling
-* Stripe publishable key separation
-* No backend secrets exposed in browser code
+<div align="center">
 
----
+<br />
 
-# 📱 Responsive Experience
+Built with ❤️ using Next.js, React & Tailwind CSS
 
-The application is designed for:
-
-```text id="avm7fc"
-Desktop
-Laptop
-Tablet
-Mobile
-```
-
-Layouts, tables, navigation, dialogs, and forms should adapt to smaller screens while preserving usability.
-
----
-
-# 🚀 Production Build
-
-Create a production build:
-
-```bash id="g8l3j1"
-pnpm build
-```
-
-Start the production server:
-
-```bash id="s8d1gj"
-pnpm start
-```
-
-The application can then be deployed to a compatible Next.js hosting platform.
-
----
-
-# 🔗 Related Backend
-
-### Nexivo AI Backend
-
-The frontend is designed to consume the Nexivo AI backend, which provides:
-
-* Authentication
-* Users
-* Leads
-* Clients
-* Projects
-* AI workflows
-* Proposals
-* Invoices
-* Payments
-* Notifications
-* Activity logs
-* API integrations
-
----
-
-# 👨‍💻 Author
-
-**Alamin Ahmed**
-
-Full Stack Developer
-
-GitHub: [@Alaminahmedariyan](https://github.com/Alaminahmedariyan)
-
----
-
-# 📄 License
-
-This project is licensed under the ISC License.
+</div>
